@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <script>
+        // Array of all state abbreviations (helpful in NPS api)
+        var stateAbbrArray = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
+
+        //alan's api key for NPS and NPS api base url
+        var apiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
+        var apiURL = "https://developer.nps.gov/api/v1/";
+
+        //Just simple div holders
+        var div1 = $("<div>").addClass("div1");
+        var div2 = $("<div>").addClass("div2");
+        $(document.body).append(div1);
+        $(document.body).append(div2);
+
+        //Dropdown menu
+        var stateSelect = $("<select>").addClass("state-select");
+        //Dropdown menu button
+        var goBtn = $("<button>").addClass("btn btn-go").text("Go");
+
+        //Append all states to dropdown menu
+        for (let i = 0; i < stateAbbrArray.length; i++) {
+            const element = stateAbbrArray[i];
+            stateSelect.append($("<option>").addClass("btn btn-" + stateAbbrArray[i]).val(stateAbbrArray[i]).text(stateAbbrArray[i]));
+        }
+
+        //Append the dropdown menu and button
+        div1.append(stateSelect);
+        div1.append(goBtn);
+
+        //Had trouble using the following function for now
+
+        // function loading() {
+        //     var loadSpan = $("<span>").text("Loading");
+        //     var dotSpan = $("<span>").text(".");
+
+        //     div1.append(loadSpan);
+        //     div1.append(dotSpan);
+
+        //     var sweetInterval = setInterval(function () {
+        //         dotSpan.empty();
+        //         for (let i = 0; i < 10; i++) {
+        //             setTimeout(function () {
+        //                 dotSpan.text(dotSpan.text() + ".");
+        //             }, 2000);
+        //         }
+        //     });
+        // }
+
+        //Go button clicked!
+        goBtn.click(() => {
+            //Disable the button!
+            goBtn.attr("disabled", true);
+            //Empty the content div for the new content
+            div2.empty();
+            //Set state variable to user-selected state
+            var state = stateSelect.val();
+            //API endpoint
+            var endPoint = "parks?";
+            //API query
+            var query = "stateCode=";
+            //Set seperate spans for static text Loading and animated dots...
+            var loadSpan = $("<span>").text("Loading");
+            var dotSpan = $("<span>").text(".");
+            //Append those spans in div1
+            div1.append(loadSpan);
+            div1.append(dotSpan);
+            //Counting variable for the following interval. (Probably could be used in a cleaner way)
+            var stupidCount = 0;
+            //Interval for animating dots
+            var sweetInterval = setInterval(function () {
+                //Once count reaches 11
+                if (stupidCount > 10) {
+                    //Clear the dots and restart stupidCount
+                    dotSpan.empty();
+                    stupidCount = 0;
+                }
+                //Continue adding dots
+                dotSpan.text(dotSpan.text() + ".");
+                //Incriment stupidCount
+                stupidCount++;
+            }, 250);
+
+            //API CALL
+            $.ajax({
+                url: apiURL + endPoint + query + state + apiKey,
+                method: "GET"
+            }).then(function (response) {
+                //Stop the animation interval and clear its elements
+                clearInterval(sweetInterval);
+                loadSpan.remove();
+                dotSpan.remove();
+                //Create and append content header
+                var info = $("<h2>").text("Parks in " + state);
+                div2.append(info);
+                //Append every park name in user's selected state to content div
+                response.data.forEach(park => {
+                    div2.append($("<p>").text(park.fullName));
+                });
+                //Enable button
+                goBtn.attr("disabled", false);
+            });
+        });
+    </script>
+</body>
+
+</html>

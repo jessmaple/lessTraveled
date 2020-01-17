@@ -137,7 +137,7 @@
         //Set state variable to user-selected state
         var state = stateSelect.val();
         //API endpoint
-        var endPoint = "places";
+        var endPoint = "places?";
         //API query
         var query = "stateCode=";
         //Set seperate spans for static text Loading and animated dots...
@@ -167,7 +167,7 @@
           url: apiURL + endPoint + query + state + apiKey,
           method: "GET"
         }).then(function(response) {
-          console.log(response);
+          console.log(response.data);
           //Stop the animation interval and clear its elements
           clearInterval(sweetInterval);
           loadSpan.remove();

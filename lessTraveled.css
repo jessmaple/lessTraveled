@@ -128,7 +128,7 @@ a.pure-button-primary {
  */
 
 .splash-container {
-  background: #d6f5d6;
+  /* background: #d6f5d6; */
   z-index: 1;
   overflow: hidden;
   /* The following styles are required for the "scroll-over" effect */
@@ -137,6 +137,21 @@ a.pure-button-primary {
   top: 0;
   left: 0;
   position: fixed !important;
+  background-image: url(https://www.nps.gov/npgallery/GetAsset/20BA3976-155D-451F-677CDE4CE8418F54);
+  /* background-size: cover; */
+  height: 100vh;
+  /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3999/Tilt-Shift_-_Cityscene.jpg); */
+  background-size: 110% 110%;
+  background-position: center center;
+  animation: shrink 17s infinite alternate;
+}
+@keyframes shrink {
+  0% {
+    background-size: 110% 110%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
 }
 
 .splash {

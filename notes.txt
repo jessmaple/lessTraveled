@@ -1,0 +1,7 @@
+App desigsn to allow user to search for national park based off of geographical location aka state
+
+Which then povides a list of optional national parks wthin that state
+
+Which then provides details of each national park allowing the user to narrow down *shrug* their options to a specific park
+
+App then recommends lodging accomodations and stuff

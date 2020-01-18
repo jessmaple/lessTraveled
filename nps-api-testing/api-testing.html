@@ -1,192 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <script>
-      //Object to link state with its abbreviation. NPS api call requires the abbreviation
-      var stateKeys = {
-        Alabama: "AL",
-        Alaska: "AK",
-        "American Samoa": "AS",
-        Arizona: "AZ",
-        Arkansas: "AR",
-        California: "CA",
-        Colorado: "CO",
-        Connecticut: "CT",
-        Delaware: "DE",
-        "District Of Columbia": "DC",
-        "Federated States Of Micronesia": "FM",
-        Florida: "FL",
-        Georgia: "GA",
-        Guam: "GU",
-        Hawaii: "HI",
-        Idaho: "ID",
-        Illinois: "IL",
-        Indiana: "IN",
-        Iowa: "IA",
-        Kansas: "KS",
-        Kentucky: "KY",
-        Louisiana: "LA",
-        Maine: "ME",
-        "Marshall Islands": "MH",
-        Maryland: "MD",
-        Massachusetts: "MA",
-        Michigan: "MI",
-        Minnesota: "MN",
-        Mississippi: "MS",
-        Missouri: "MO",
-        Montana: "MT",
-        Nebraska: "NE",
-        Nevada: "NV",
-        "New Hampshire": "NH",
-        "New Jersey": "NJ",
-        "New Mexico": "NM",
-        "New York": "NY",
-        "North Carolina": "NC",
-        "North Dakota": "ND",
-        "Northern Mariana Islands": "MP",
-        Ohio: "OH",
-        Oklahoma: "OK",
-        Oregon: "OR",
-        Palau: "PW",
-        Pennsylvania: "PA",
-        "Puerto Rico": "PR",
-        "Rhode Island": "RI",
-        "South Carolina": "SC",
-        "South Dakota": "SD",
-        Tennessee: "TN",
-        Texas: "TX",
-        Utah: "UT",
-        Vermont: "VT",
-        "Virgin Islands": "VI",
-        Virginia: "VA",
-        Washington: "WA",
-        "West Virginia": "WV",
-        Wisconsin: "WI",
-        Wyoming: "WY"
-      };
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
 
-      //Create array of state names from stateKeys object
-      var stateNames = Object.keys(stateKeys);
+<body>
+  <script>
+    //Object to link state with its abbreviation. NPS api call requires the abbreviation
+    var stateKeys = {
+      Alabama: "AL",
+      Alaska: "AK",
+      "American Samoa": "AS",
+      Arizona: "AZ",
+      Arkansas: "AR",
+      California: "CA",
+      Colorado: "CO",
+      Connecticut: "CT",
+      Delaware: "DE",
+      "District Of Columbia": "DC",
+      "Federated States Of Micronesia": "FM",
+      Florida: "FL",
+      Georgia: "GA",
+      Guam: "GU",
+      Hawaii: "HI",
+      Idaho: "ID",
+      Illinois: "IL",
+      Indiana: "IN",
+      Iowa: "IA",
+      Kansas: "KS",
+      Kentucky: "KY",
+      Louisiana: "LA",
+      Maine: "ME",
+      "Marshall Islands": "MH",
+      Maryland: "MD",
+      Massachusetts: "MA",
+      Michigan: "MI",
+      Minnesota: "MN",
+      Mississippi: "MS",
+      Missouri: "MO",
+      Montana: "MT",
+      Nebraska: "NE",
+      Nevada: "NV",
+      "New Hampshire": "NH",
+      "New Jersey": "NJ",
+      "New Mexico": "NM",
+      "New York": "NY",
+      "North Carolina": "NC",
+      "North Dakota": "ND",
+      "Northern Mariana Islands": "MP",
+      Ohio: "OH",
+      Oklahoma: "OK",
+      Oregon: "OR",
+      Palau: "PW",
+      Pennsylvania: "PA",
+      "Puerto Rico": "PR",
+      "Rhode Island": "RI",
+      "South Carolina": "SC",
+      "South Dakota": "SD",
+      Tennessee: "TN",
+      Texas: "TX",
+      Utah: "UT",
+      Vermont: "VT",
+      "Virgin Islands": "VI",
+      Virginia: "VA",
+      Washington: "WA",
+      "West Virginia": "WV",
+      Wisconsin: "WI",
+      Wyoming: "WY"
+    };
 
-      //alan's api key for NPS and NPS api base url
-      var apiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
-      var apiURL = "https://developer.nps.gov/api/v1/";
+    //Create array of state names from stateKeys object
+    var stateNames = Object.keys(stateKeys);
 
-      //Just simple div holders
-      var div1 = $("<div>").addClass("div1");
-      var div2 = $("<div>").addClass("div2");
-      $(document.body).append(div1);
-      $(document.body).append(div2);
+    //alan's api key for NPS and NPS api base url
+    var apiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
+    var apiURL = "https://developer.nps.gov/api/v1/";
 
-      //Dropdown menu
-      var stateSelect = $("<select>").addClass("state-select");
-      //Dropdown menu button
-      var goBtn = $("<button>")
-        .addClass("btn btn-go")
-        .text("Go");
+    //Create array of endpoints
+    var endPointArray = [
+      "campgrounds?",
+      "events?",
+      "lessonplans?",
+      "newsreleases?",
+      "parks?",
+      "people?",
+      "places?",
+      "visitorcenters?"
+    ];
 
-      //Append all states to dropdown menu
-      for (let i = 0; i < stateNames.length; i++) {
-        const element = stateNames[i];
-        stateSelect.append(
-          $("<option>")
-            .addClass("btn btn-" + stateNames[i])
-            .val(stateNames[i])
-            .text(stateNames[i])
-        );
-      }
+    //Just simple div holders
+    var div1 = $("<div>").addClass("div1");
+    var div2 = $("<div>").addClass("div2");
+    $(document.body).append(div1);
+    $(document.body).append(div2);
 
-      //Append the dropdown menu and button
-      div1.append(stateSelect);
-      div1.append(goBtn);
+    //Dropdown menu
+    var stateSelect = $("<select>").addClass("state-select");
+    //Dropdown menu button
+    var goBtn = $("<button>")
+      .addClass("btn btn-go")
+      .text("Go");
 
-      //Had trouble using the following function for now
+    //Append all states to dropdown menu
+    for (let i = 0; i < stateNames.length; i++) {
+      const element = stateNames[i];
+      stateSelect.append(
+        $("<option>")
+          .addClass("btn btn-" + stateNames[i])
+          .val(stateNames[i])
+          .text(stateNames[i])
+      );
+    }
 
-      // function loading() {
-      //     var loadSpan = $("<span>").text("Loading");
-      //     var dotSpan = $("<span>").text(".");
+    //Append the dropdown menu and button
+    div1.append(stateSelect);
+    div1.append(goBtn);
 
-      //     div1.append(loadSpan);
-      //     div1.append(dotSpan);
+    //Had trouble using the following function for now
 
-      //     var sweetInterval = setInterval(function () {
-      //         dotSpan.empty();
-      //         for (let i = 0; i < 10; i++) {
-      //             setTimeout(function () {
-      //                 dotSpan.text(dotSpan.text() + ".");
-      //             }, 2000);
-      //         }
-      //     });
-      // }
+    // function loading() {
+    //     var loadSpan = $("<span>").text("Loading");
+    //     var dotSpan = $("<span>").text(".");
 
-      //Go button clicked!
-      goBtn.click(() => {
-        //Disable the button!
-        goBtn.attr("disabled", true);
-        //Empty the content div for the new content
-        div2.empty();
-        //Set state variable to user-selected state
-        var state = stateSelect.val();
-        //API endpoint
-        var endPoint = "places?";
-        //API query
-        var query = "stateCode=";
-        //Set seperate spans for static text Loading and animated dots...
-        var loadSpan = $("<span>").text("Loading");
-        var dotSpan = $("<span>").text(".");
-        //Append those spans in div1
-        div1.append(loadSpan);
-        div1.append(dotSpan);
-        //Counting variable for the following interval. (Probably could be used in a cleaner way)
-        var stupidCount = 0;
-        //Interval for animating dots
-        var sweetInterval = setInterval(function() {
-          //Once count reaches 11
-          if (stupidCount > 10) {
-            //Clear the dots and restart stupidCount
-            dotSpan.empty();
-            stupidCount = 0;
-          }
-          //Continue adding dots
-          dotSpan.text(dotSpan.text() + ".");
-          //Incriment stupidCount
-          stupidCount++;
-        }, 250);
+    //     div1.append(loadSpan);
+    //     div1.append(dotSpan);
 
-        //API CALL
+    //     var loadingAnimation = setInterval(function () {
+    //         dotSpan.empty();
+    //         for (let i = 0; i < 10; i++) {
+    //             setTimeout(function () {
+    //                 dotSpan.text(dotSpan.text() + ".");
+    //             }, 2000);
+    //         }
+    //     });
+    // }
+
+    function displayResponse() {
+      // maybe one dayyyyyyyy
+    }
+
+    //Go button clicked!
+    goBtn.click(() => {
+      //Disable the button!
+      goBtn.attr("disabled", true);
+      //Empty the content div for the new content
+      div2.empty();
+      //Set state variable to user-selected state
+      var state = stateKeys[stateSelect.val()];
+      //API query
+      var query = "stateCode=";
+      //Set seperate spans for static text Loading and animated dots...
+      var loadSpan = $("<span>").text("Loading");
+      var dotSpan = $("<span>").text(".");
+      //Append those spans in div1
+      div1.append(loadSpan);
+      div1.append(dotSpan);
+      //Counting variable for the following interval. (Probably could be used in a cleaner way)
+      var stupidCount = 0;
+      //Interval for animating dots
+      var loadingAnimation = setInterval(function () {
+        //Once count reaches 11
+        if (stupidCount > 10) {
+          //Clear the dots and restart stupidCount
+          dotSpan.empty();
+          stupidCount = 0;
+        }
+        //Continue adding dots
+        dotSpan.text(dotSpan.text() + ".");
+        //Incriment stupidCount
+        stupidCount++;
+      }, 250);
+
+      var responseArray = [];
+
+      recurrazy();
+
+      //API CALL
+      function recurrazy() {
+        var curEndPoint = endPointArray.shift();
         $.ajax({
-          url: apiURL + endPoint + query + state + apiKey,
+          url: apiURL + curEndPoint + query + state + apiKey,
           method: "GET"
-        }).then(function(response) {
-          console.log("Response from endpoint: " + endPoint);
-          console.log(response);
-          //Stop the animation interval and clear its elements
-          clearInterval(sweetInterval);
-          loadSpan.remove();
-          dotSpan.remove();
-          //Create and append content header
-          var info = $("<h2>").text("Parks in " + state);
-          div2.append(info);
-          //Append every park name in user's selected state to content div
-          response.data.forEach(park => {
-            div2.append($("<p>").text(park.fullName));
+        }).then(function (response) {
+          //store response in responsearray
+          responseArray.push({
+            endPoint: curEndPoint,
+            res: response
           });
-          //Enable button
-          goBtn.attr("disabled", false);
+          console.log("stored response from endpoint: " + curEndPoint);
+          //Stop the animation interval and clear its elements display response
+          if (endPointArray.length < 1) {
+            clearInterval(loadingAnimation);
+            loadSpan.remove();
+            dotSpan.remove();
+            //Enable button
+            goBtn.attr("disabled", false);
+
+            for (let i = 0; i < responseArray.length; i++) {
+              console.log("--------------------------------")
+              console.log("endpoint: " + responseArray[i].endPoint);
+              console.log("response: ");
+              console.log(responseArray[i].res);
+            }
+          } else {
+            recurrazy();
+          }
         });
-      });
-    </script>
-  </body>
+      }
+    });
+  </script>
+</body>
+
 </html>

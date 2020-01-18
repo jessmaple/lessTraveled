@@ -179,10 +179,13 @@
 
       var responseArray = [];
 
-      recurrazy();
 
-      //API CALL
-      function recurrazy() {
+// Recursive API call
+// could be dangerous to break this. an infinite loop might
+// cause the api key to exceed its usage limit
+// monitor each recursion through console
+      giveEverything();
+      function giveEverything() {
         var curEndPoint = endPointArray.shift();
         $.ajax({
           url: apiURL + curEndPoint + query + state + apiKey,
@@ -209,7 +212,7 @@
               console.log(responseArray[i].res);
             }
           } else {
-            recurrazy();
+            giveEverything();
           }
         });
       }

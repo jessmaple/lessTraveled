@@ -58,4 +58,17 @@ var stateKeys = {
     "West Virginia": "WV",
     Wisconsin: "WI",
     Wyoming: "WY"
-  };
+};
+
+//Grab dropdown
+var splashDropdown = $(".splash-dropdown");
+
+//Append all states to dropdown menu
+for (let i = 0; i < stateNames.length; i++) {
+    stateSelect.append(
+        $("<option>")
+            .addClass("btn btn-" + stateNames[i])
+            .val(stateNames[i])
+            .text(stateNames[i])
+    );
+}

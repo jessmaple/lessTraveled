@@ -67,7 +67,7 @@ var splashDropdown = $(".splash-dropdown");
 for (let i = 0; i < stateNames.length; i++) {
     stateSelect.append(
         $("<option>")
-            .addClass("btn btn-" + stateNames[i])
+            .addClass("option-" + stateNames[i])
             .val(stateNames[i])
             .text(stateNames[i])
     );

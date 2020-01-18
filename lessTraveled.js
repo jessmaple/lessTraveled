@@ -1,3 +1,4 @@
+var state = "";
 var stateKeys = {
     Alabama: "AL",
     Alaska: "AK",
@@ -72,3 +73,7 @@ for (let i = 0; i < stateNames.length; i++) {
             .text(stateNames[i])
     );
 }
+
+splashDropdown.on("change", function(){
+    state = "somethintsomethintkdjfa;lksjdf"
+});

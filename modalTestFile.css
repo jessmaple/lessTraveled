@@ -14,6 +14,7 @@
   }
   
   .modal__bg {
+
     position: absolute;
     top: 0;
     right: 0;
@@ -32,18 +33,18 @@
     visibility: ;
   }
   
-  .modal-state:checked + .modal .modal__inner {
+  .modal-state:checked + .modal .modal__park {
     top: 0;
   }
-  
-  .modal__inner {
+
+  .modal__park {
     transition: top .25s ease;
     position: absolute;
     top: -20%;
     right: 0;
     bottom: 0;
     left: 0;
-    width: 50%;
+    width: 70%;
     margin: auto;
     overflow: auto;
     background: #fff;
@@ -52,6 +53,38 @@
     height: 100%;
   }
   
+  .modal__results {
+    /* background-color: gray; */
+    transition: top .25s ease;
+    position: absolute;
+    top: -20%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    background: #fff;
+    border-radius: 5px;
+    padding: 1em 2em;
+    height: 100%;
+  }
+  
+  .columns {
+    height: 75%;
+    margin-top: 20%;
+  }
+
+  #map-column {
+    background-color: green;
+    width: 33%;
+  }
+
+  #results-column {
+    background-color: hotpink;
+    width: 67%;
+  }
+
   .modal__close {
     position: absolute;
     right: 1em;
@@ -94,7 +127,7 @@
   }
   
   
-  /* Other
+  /* BUTTON STUFF - DELETE ALL OF THIS AFTER CONNECTING THE DROPDOWN EVENT LISTENER
    * =============================== */
   body {
     padding: 1%;

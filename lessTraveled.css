@@ -500,3 +500,10 @@ p img {
   opacity: 1;
   visibility: visible;
 }
+
+/* Map */
+
+#map {
+  height: 400px;
+  width: 100%;
+}

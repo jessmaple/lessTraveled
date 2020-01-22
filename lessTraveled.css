@@ -464,4 +464,39 @@ p img {
   float: left;
   margin: 0 1em 1em 0;
 }
+
+.splash-modal {
+  position: relative;
+  height: 50vh;
+  width: 100px;
+  left: 30vh;
+  top: 15vh;
+}
 /* Park Modal */
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  /* position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; */
+  z-index: 2;
+
+  margin-bottom: 50vh;
+  width: 980px;
+  height: 90vh;
+  text-align: center;
+  background: white;
+  transition: opacity 0.25s ease;
+}
+
+.modal-state {
+  display: none;
+}
+
+.modal-state:checked + .modal {
+  opacity: 1;
+  visibility: visible;
+}

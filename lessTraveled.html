@@ -23,15 +23,30 @@
     />
 
     <link rel="stylesheet" href="lessTraveled.css" />
-    <script src="lessTraveled.js" defer></script>
+  
 
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
 
   </head>
 <!-- Landing Page -->
   <body>
-   ` -->
+   
+    <div class="splash-modal">
+      <input class="modal-state" id="modal-1" type="checkbox" />
 
+      <div class="modal">
+        <label class="modal__bg" for="modal-1"></label>
+        <div class="modal__results">
+            <div class="pure-g">
+                <div id="map-column" class="pure-u-1-2 columns">MAP - DELETE ME</div>
+                <div id="results-column" class="pure-u-1-2 columns">RESULTS - DELETE ME</div>
+                <label class="btn" for="modal-1"> X </label>
+       
+            </div>
+        </div>
+     </div>
+
+    </div>
     <div class="splash-container">
       <div class="splash">
         <h1 class="splash-head">
@@ -48,71 +63,77 @@
         <div class="splash-dropdown">
           <label>
           <form>
-            <select>
-           <!-- 
+            <select id="states">
+           
             DROP DOWN BOX STATES 
-            <option value="Alabama"></option>
-           <option value="Alaska"></option>
-           <option value="Arizona"></option>
-           <option value="Arkansas"></option>
-           <option value="California"></option>
-           <option value="Colorado"></option>
-           <option value="Connecticut"></option>
-           <option value="Delaware"></option>
-           <option value="Florida"></option>
-           <option value="Georgia"></option>
-           <option value="Hawaii"></option>
-           <option value="Idaho"></option>
-           <option value="Illinois"></option>
-           <option value="Indiana"></option>
-           <option value="Iowa"></option>
-           <option value="Kansas"></option>
-           <option value="Kentucky"></option>
-           <option value="Louisiana"></option>
-           <option value="Maine"></option>
-           <option value="Maryland"></option>
-           <option value="Massachusetts"></option>
-           <option value="Michigan"></option>
-           <option value="Minnesota"></option>
-           <option value="Mississippi"></option>
-           <option value="Missouri"></option>
-           <option value="Montana"></option>
-           <option value="Nebraska"></option>
-           <option value="Nevada"></option>
-           <option value="New Hampshire"></option>
-           <option value="New Jersey"></option>
-           <option value="New Mexico"></option>
-           <option value="New York"></option>
-           <object value="North Carolina"></object>
-           <object value="North Dakota"></object>
-           <object value="Ohio"></object>
-           <object value="Oklahoma"></object>
-           <object value="Oregon"></object>
-           <object value="Pennsylvania"></object>
-           <object value="Rhode Island"></object>
-           <object value="South Carolina"></object>
-           <object value="South Dakota"></object>
-           <object value="Tennessee"></object>
-           <object value="Texas"></object>
-           <object value="Utah"></object>
-           <object value="Vermont"></object>
-           <object value="Virginia"></object>
-           <object value="Washington"></object>
-           <object value="West Virginia"></object>
-           <object value="Wisconsin"></object>
-           <object value="Wyoming"></object>
-           <object value="District of Columbia"></object>
-           <object value="Puerto Rico"></object>
-           <object value="Guam"></object>
-           <object value="American Samoa"></object>"
-           <object value="U.S. Virgin Islands"></object>
-           <object value="Northern Mariana Islands"></object> -->
+           <option value="Alabama">Alabama</option>
+           <option value="Alaska">Alaska</option>
+           <option value="Arizona">Arizona</option>
+           <option value="Arkansas">Arkansas</option>
+           <option value="California">California</option>
+           <option value="Colorado">Colorado</option>
+           <option value="Connecticut">Connecticut</option>
+           <option value="Delaware">Delaware</option>
+           <option value="Florida">Florida</option>
+           <option value="Georgia">Georgia</option>
+           <option value="Hawaii">Hawaii</option>
+           <option value="Idaho">Idaho</option>
+           <option value="Illinois">Illinois</option>
+           <option value="Indiana">Indiana</option>
+           <option value="Iowa">Iowa</option>
+           <option value="Kansas">Kansas</option>
+           <option value="Kentucky">Kentucky</option>
+           <option value="Louisiana">Louisiana</option>
+           <option value="Maine">Maine</option>
+           <option value="Maryland">Maryland</option>
+           <option value="Massachusetts">Massachusetts</option>
+           <option value="Michigan">Michigan</option>
+           <option value="Minnesota">Minnesota</option>
+           <option value="Mississippi">Mississippi</option>
+           <option value="Missouri">Missouri</option>
+           <option value="Montana">Montana</option>
+           <option value="Nebraska">Nebraska</option>
+           <option value="Nevada">Nevada</option>
+           <option value="New Hampshire">New Hampshire</option>
+           <option value="New Jersey">New Jersey</option>
+           <option value="New Mexico">New Mexico</option>
+           <option value="New York">New York</option>
+           <option value="North Carolina">North Carolina</option>
+           <option value="Ohio">Ohio</option>
+           <option value="Oklahoma">Oklahoma</option>
+           <option value="Oregon">Oregon</option>
+           <option value="Pennsylvania">Pennsylvania</option>
+           <option value="Rhode Island">Rhode Island</option>
+           <option value="South Carolina">South Carolina</option>
+           <option value="South Dakota">South Dakota</option>
+           <option value="Tennessee">Tennessee</option>
+           <option value="Texas">Texas</option>
+           <option value="Utah">Utah</option>
+           <option value="Vermont">Vermont</option>
+           <option value="Virginia">Virginia</option>
+           <option value="Washington">Washington</option>
+           <option value="West Virginia">West Virginia</option>
+           <option value="Wisconsin">Wisconsin</option>
+           <option value="Wyoming">Wyoming</option>
+           <option value="District of Columbia">District of Columbia</option>
+           <option value="Puerto Rico">Puerto Rico</option>
+           <option value="Guam">Guam</option>
+           <option value="American Samoa">American Samoa</option>"
+           <option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
+           <option value="Northern Mariana Islands">Northern Mariana Islands</option>
           </select>
           </form>
         </datalist></div>
       </div>
       <div class="footer l-box is-center">
         Made by Aaron, Alan, & Jess
+        <label class="btn" for="modal-1">Show me modal with a cat</label>
+       
+        <!-- <div class="modal">
+        </div> -->
+
+       
+
       </div>
     </div>
 
@@ -122,30 +143,23 @@
       </div>
     </div>
 
+  
     <!-- RESULTS MODAL PAGE -->
 
-    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE
     <div id="results-page">
     <label class="btn" for="modal-1" id="park-button">DELETE ME</label>
-    <!-- MODAL WINDOWN -->
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    <div class="modal">
-        <label class="modal__bg" for="modal-1"></label>
-        <div class="modal__results">
-            <div class="pure-g">
-                <div id="map-column" class="pure-u-1-2 columns">MAP - DELETE ME</div>
-                <div id="results-column" class="pure-u-1-2 columns">RESULTS - DELETE ME</div>
-            </div>
-        </div>
-     </div>
+    < MODAL WINDOWN -->
+    <!-- <input class="modal-state" id="modal-1" type="checkbox" /> -->
+
   </div>
 
 <!-- PARK MODAL PAGE -->
     <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
-   <div id="park-page">
-    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label>
+   <!-- <div id="park-page">
+    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label> -->
     <!-- MODAL WINDOWN -->
-    <input class="modal-state" id="modal-1" type="checkbox" />
+    <!-- <input class="modal-state" id="modal-1" type="checkbox" />
     <div class="modal">
         <label class="modal__bg" for="modal-1"></label>
         <div class="modal__park">
@@ -155,9 +169,9 @@
                 <img />
                 <p id="park-description"></p>
                 <br>
-                <br>
+                <br> -->
                 <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
-                <p id="park-hours"></p>
+                <!-- <p id="park-hours"></p>
                 <br>
                 <p id="park-address"></p>
                 <br>
@@ -166,8 +180,9 @@
             </p>
         </div>
      </div>
-  </div>
-  
+  </div> --> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="lessTraveled.js" defer></script>  
     
   </body>
 </html>

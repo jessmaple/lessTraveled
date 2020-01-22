@@ -137,7 +137,7 @@ a.pure-button-primary {
   top: 0;
   left: 0;
   position: fixed !important;
-  background-image: url(https://www.nps.gov/npgallery/GetAsset/20BA3976-155D-451F-677CDE4CE8418F54);
+  background-image: url(images/landing.png);
   /* background-size: cover; */
   height: 100vh;
   background-size: 110% 110%;

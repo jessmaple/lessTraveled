@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="An application" />
-    <title>Landing page &ndash; Layout Examples &ndash; Pure</title>
+    <meta name="lessTraveled" content="An application" />
+    <title>lessTraveled &ndash; what are you searching for? &ndash;</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
@@ -23,23 +23,146 @@
     />
 
     <link rel="stylesheet" href="lessTraveled.css" />
-  <script src="lessTraveled.js" defer></script>
-  </head>
+    <script src="lessTraveled.js" defer></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+
+  </head>
+<!-- Landing Page -->
   <body>
    ` -->
 
     <div class="splash-container">
       <div class="splash">
-        <h1 class="splash-head">Logo goes here</h1>
-        <p class="splash-subhead"></p>
-        <p>
-          ''
-          <a href="resultsPage.html" class="pure-button pure-button-primary"
-            >Choose your destination</a
-          >
+        <h1 class="splash-head">
+          <img
+            src="https://i.imgur.com/w6MJgvU.png"
+            width="323"
+            height="150.5"
+            alt="lessTraveled logo"
+          />
+        </h1>
+        <p class="splash-subhead">
+          Choose your path
         </p>
+        <div class="splash-dropdown">
+          <label>
+          <form>
+            <select>
+           <!-- 
+            DROP DOWN BOX STATES 
+            <option value="Alabama"></option>
+           <option value="Alaska"></option>
+           <option value="Arizona"></option>
+           <option value="Arkansas"></option>
+           <option value="California"></option>
+           <option value="Colorado"></option>
+           <option value="Connecticut"></option>
+           <option value="Delaware"></option>
+           <option value="Florida"></option>
+           <option value="Georgia"></option>
+           <option value="Hawaii"></option>
+           <option value="Idaho"></option>
+           <option value="Illinois"></option>
+           <option value="Indiana"></option>
+           <option value="Iowa"></option>
+           <option value="Kansas"></option>
+           <option value="Kentucky"></option>
+           <option value="Louisiana"></option>
+           <option value="Maine"></option>
+           <option value="Maryland"></option>
+           <option value="Massachusetts"></option>
+           <option value="Michigan"></option>
+           <option value="Minnesota"></option>
+           <option value="Mississippi"></option>
+           <option value="Missouri"></option>
+           <option value="Montana"></option>
+           <option value="Nebraska"></option>
+           <option value="Nevada"></option>
+           <option value="New Hampshire"></option>
+           <option value="New Jersey"></option>
+           <option value="New Mexico"></option>
+           <option value="New York"></option>
+           <object value="North Carolina"></object>
+           <object value="North Dakota"></object>
+           <object value="Ohio"></object>
+           <object value="Oklahoma"></object>
+           <object value="Oregon"></object>
+           <object value="Pennsylvania"></object>
+           <object value="Rhode Island"></object>
+           <object value="South Carolina"></object>
+           <object value="South Dakota"></object>
+           <object value="Tennessee"></object>
+           <object value="Texas"></object>
+           <object value="Utah"></object>
+           <object value="Vermont"></object>
+           <object value="Virginia"></object>
+           <object value="Washington"></object>
+           <object value="West Virginia"></object>
+           <object value="Wisconsin"></object>
+           <object value="Wyoming"></object>
+           <object value="District of Columbia"></object>
+           <object value="Puerto Rico"></object>
+           <object value="Guam"></object>
+           <object value="American Samoa"></object>"
+           <object value="U.S. Virgin Islands"></object>
+           <object value="Northern Mariana Islands"></object> -->
+          </select>
+          </form>
+        </datalist></div>
+      </div>
+      <div class="footer l-box is-center">
+        Made by Aaron, Alan, & Jess
       </div>
     </div>
+
+    <div class="header">
+      <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="">lessTraveled</a>
+      </div>
+    </div>
+
+    <!-- RESULTS MODAL PAGE -->
+    
+    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+    <label class="btn" for="modal-1" id="park-button">DELETE ME</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+        <label class="modal__bg" for="modal-1"></label>
+        <div class="modal__results">
+            <div class="pure-g">
+                <div id="map-column" class="pure-u-1-2 columns">MAP - DELETE ME</div>
+                <div id="results-column" class="pure-u-1-2 columns">RESULTS - DELETE ME</div>
+            </div>
+        </div>
+    </div>
+
+!-- PARK MODAL PAGE -->
+    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+        <label class="modal__bg" for="modal-1"></label>
+        <div class="modal__park">
+            <label class="modal__close" for="modal-1"></label>
+            <h2 id="park-name"></h2>
+            <p>
+                <img />
+                <p id="park-description"></p>
+                <br>
+                <br>
+                <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
+                <p id="park-hours"></p>
+                <br>
+                <p id="park-address"></p>
+                <br>
+                <br>
+                Click <a id="park-site" href="">here</a> to visit the official park website.
+            </p>
+        </div>
+    </div>
+    
   </body>
 </html>

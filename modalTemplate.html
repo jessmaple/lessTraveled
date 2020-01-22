@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <link rel="stylesheet" href="modalTestFile.css" />
+</head>
+
+<body>
+    <!-- PARK MODAL PAGE -->
+    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+        <label class="modal__bg" for="modal-1"></label>
+        <div class="modal__park">
+            <label class="modal__close" for="modal-1"></label>
+            <h2 id="park-name"></h2>
+            <p>
+                <img />
+                <p id="park-description"></p>
+                <br>
+                <br>
+                <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
+                <p id="park-hours"></p>
+                <br>
+                <p id="park-address"></p>
+                <br>
+                <br>
+                Click <a id="park-site" href="">here</a> to visit the official park website.
+            </p>
+        </div>
+
+    </div>
+</body>
+
+</html>

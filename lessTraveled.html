@@ -26,7 +26,7 @@
     <script src="lessTraveled.js" defer></script>
 
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
-    
+
   </head>
 <!-- Landing Page -->
   <body>
@@ -126,6 +126,47 @@
       </div>
     </div>
 
+    <!-- RESULTS MODAL PAGE -->
+    
+    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+    <label class="btn" for="modal-1" id="park-button">DELETE ME</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+        <label class="modal__bg" for="modal-1"></label>
+        <div class="modal__results">
+            <div class="pure-g">
+                <div id="map-column" class="pure-u-1-2 columns">MAP - DELETE ME</div>
+                <div id="results-column" class="pure-u-1-2 columns">RESULTS - DELETE ME</div>
+            </div>
+        </div>
+    </div>
+
+!-- PARK MODAL PAGE -->
+    <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+        <label class="modal__bg" for="modal-1"></label>
+        <div class="modal__park">
+            <label class="modal__close" for="modal-1"></label>
+            <h2 id="park-name"></h2>
+            <p>
+                <img />
+                <p id="park-description"></p>
+                <br>
+                <br>
+                <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
+                <p id="park-hours"></p>
+                <br>
+                <p id="park-address"></p>
+                <br>
+                <br>
+                Click <a id="park-site" href="">here</a> to visit the official park website.
+            </p>
+        </div>
+    </div>
     
   </body>
 </html>

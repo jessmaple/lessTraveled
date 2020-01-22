@@ -63,3 +63,18 @@ var stateKeys = {
 $("#states").on("change", function() {
   $("label.btn")[0].click();
 });
+
+// Map JS
+
+function initMap() {
+  var Denali = {lat:lat:63.734353 , lng:-148.912016 };
+  
+  var map = new google.maps.Map(
+    document.getElementById('map'), {
+      zoom: 4, center: Denali});
+
+  var marker = new google.maps.Marker ({
+    position: Denali, map: map})
+  }
+
+

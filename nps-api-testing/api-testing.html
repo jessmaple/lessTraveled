@@ -84,6 +84,8 @@
 
     //Create array of endpoints
     var npsEndpointArray = [
+      "alerts?",
+      "articles?",
       "campgrounds?",
       "events?",
       "lessonplans?",
@@ -107,7 +109,7 @@
       .addClass("btn btn-go")
       .text("Go");
 
-    //Append all states to dropdown menu
+    //Function to append all states to dropdown menu
     function appendStates() {
       for (let i = 0; i < stateNames.length; i++) {
         const element = stateNames[i];
@@ -119,6 +121,7 @@
         );
       }
     }
+
     appendStates()
     //Append the dropdown menu and button
     div1.append(stateSelect);

@@ -1,3 +1,4 @@
+//Object to link state with its abbreviation. NPS api call requires the abbreviation
 var stateKeys = {
   Alabama: "AL",
   Alaska: "AK",
@@ -60,6 +61,37 @@ var stateKeys = {
   Wyoming: "WY"
 };
 
+//Create array of state names from stateKeys object
+var stateNames = Object.keys(stateKeys);
+
+//alan's api key for NPS and NPS api base url
+var npsApiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
+var npsApiURL = "https://developer.nps.gov/api/v1/";
+
+//Create array of endpoints
+var npsEndpointArray = [
+  "campgrounds?",
+  "events?",
+  "lessonplans?",
+  "newsreleases?",
+  "parks?",
+  "people?",
+  "places?",
+  "visitorcenters?"
+];
+
+//Dropdown menu
+var stateSelect = $("#states");
+
+//Function to append all states to dropdown menu
+function appendStates() {
+  for (let i = 0; i < stateNames.length; i++) {
+    const element = stateNames[i];
+    stateSelect.append($("<option>").val(stateNames[i]).text(stateNames[i]));
+  }
+}
+
+appendStates()
 $("#states").on("change", function() {
   $("label.btn")[0].click();
 });
@@ -67,7 +99,7 @@ $("#states").on("change", function() {
 // Map JS
 
 function initMap() {
-  var Denali = {lat:lat:63.734353 , lng:-148.912016 };
+  var Denali = {lat:63.734353 , lng:-148.912016 };
   
   var map = new google.maps.Map(
     document.getElementById('map'), {

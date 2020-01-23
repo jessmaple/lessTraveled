@@ -79,11 +79,11 @@
     var stateNames = Object.keys(stateKeys);
 
     //alan's api key for NPS and NPS api base url
-    var apiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
-    var apiURL = "https://developer.nps.gov/api/v1/";
+    var npsApiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
+    var npsApiURL = "https://developer.nps.gov/api/v1/";
 
     //Create array of endpoints
-    var endPointArray = [
+    var npsEndpointArray = [
       "campgrounds?",
       "events?",
       "lessonplans?",
@@ -108,16 +108,18 @@
       .text("Go");
 
     //Append all states to dropdown menu
-    for (let i = 0; i < stateNames.length; i++) {
-      const element = stateNames[i];
-      stateSelect.append(
-        $("<option>")
-          .addClass("btn btn-" + stateNames[i])
-          .val(stateNames[i])
-          .text(stateNames[i])
-      );
+    function appendStates() {
+      for (let i = 0; i < stateNames.length; i++) {
+        const element = stateNames[i];
+        stateSelect.append(
+          $("<option>")
+            .addClass("btn btn-" + stateNames[i])
+            .val(stateNames[i])
+            .text(stateNames[i])
+        );
+      }
     }
-
+    appendStates()
     //Append the dropdown menu and button
     div1.append(stateSelect);
     div1.append(goBtn);
@@ -180,15 +182,15 @@
       var responseArray = [];
 
 
-// Recursive API call
-// could be dangerous to break this. an infinite loop might
-// cause the api key to exceed its usage limit
-// monitor each recursion through console
+      // Recursive API call
+      // could be dangerous to break this. an infinite loop might
+      // cause the api key to exceed its usage limit
+      // monitor each recursion through console
       giveEverything();
       function giveEverything() {
-        var curEndPoint = endPointArray.shift();
+        var curEndPoint = npsEndpointArray.shift();
         $.ajax({
-          url: apiURL + curEndPoint + query + state + apiKey,
+          url: npsApiURL + curEndPoint + query + state + npsApiKey,
           method: "GET"
         }).then(function (response) {
           //store response in responsearray
@@ -198,7 +200,7 @@
           });
           console.log("stored response from endpoint: " + curEndPoint);
           //Stop the animation interval and clear its elements display response
-          if (endPointArray.length < 1) {
+          if (npsEndpointArray.length < 1) {
             clearInterval(loadingAnimation);
             loadSpan.remove();
             dotSpan.remove();

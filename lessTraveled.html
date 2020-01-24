@@ -15,24 +15,15 @@
 
   <link rel="stylesheet" href="lessTraveled.css" />
 
-
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
 
 </head>
 <!-- Landing Page -->
-<<<<<<< HEAD
-  <body onload="randombg()">
-   
-    <div class="splash-modal">
-      <input class="modal-state" id="modal-1" type="checkbox" />
-=======
->>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
 
-<body>
+<body onload="randombg()">
 
   <div class="splash-modal">
     <input class="modal-state" id="modal-1" type="checkbox" />
-
     <div class="modal">
       <label class="modal__bg" for="modal-1"></label>
       <div class="modal__results">
@@ -41,78 +32,45 @@
           <div id="map-column" class="pure-u-1-2 columns">MAP - DELETE ME
             <div id="map">
               <!-- replace value with key paramater with api key -->
-              <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB30200sZiA3TCdbLm4KI7EoHlDWD8ZcY&callback=initMap"></script>
             </div>
           </div>
           <div id="results-column" class="pure-u-1-2 columns">RESULTS - DELETE ME</div>
-          <label class="btn" for="modal-1"> X </label>
-
+          <label class="btn-1" for="modal-1"> X </label>
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-    <div id="splash-container" class="splash-container">
-      <div class="splash">
-        <h1 class="splash-head">
-          <img
-            src="https://i.imgur.com/w6MJgvU.png"
-            width="323"
-            height="150.5"
-            alt="lessTraveled logo"
-          />
-        </h1>
-        <p class="splash-subhead">
-          Choose your path
-        </p>
-        <div class="splash-dropdown">
-          <label>
-=======
-
   </div>
-  <div class="splash-container">
+
+  <div id="splash-container" class="splash-container">
     <div class="splash">
       <h1 class="splash-head">
         <img src="https://i.imgur.com/w6MJgvU.png" width="323" height="150.5" alt="lessTraveled logo" />
       </h1>
       <p class="splash-subhead">
+        Choose your path
       </p>
       <div class="splash-dropdown">
         <label>
->>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
           <form>
             <!-- DROP DOWN BOX STATES  -->
 
-            <select id="states"><option value="" disabled selected hidden>choose your path</option></select>
+            <select id="states">
+              <option value="" disabled selected hidden>choose your path</option>
+            </select>
           </form>
           </datalist></div>
     </div>
     <div class="footer l-box is-center">
-      Made by Aaron, Alan, & Jess
+      <span id="footer-text">Made by Aaron, Alan, & Jess</span>
       <label class="btn" for="modal-1">Show me modal with a cat</label>
-
-      <!-- <div class="modal">
-        </div> -->
-
-
-
     </div>
   </div>
 
-<<<<<<< HEAD
-    <!-- <div class="header">
+  <!-- <div class="header">
       <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="">lessTraveled</a>
       </div>
     </div> -->
-=======
-  <div class="header">
-    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-      <a class="pure-menu-heading" href="">lessTraveled</a>
-    </div>
-  </div>
-
->>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
 
   <!-- RESULTS MODAL PAGE -->
 
@@ -150,20 +108,14 @@
             </p>
         </div>
      </div>
-<<<<<<< HEAD
-  </div> --> 
-  
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="randomBackgroundTest.js"></script>  
-  <script src="lessTraveled.js"></script>  
-</html>
-=======
   </div> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="lessTraveled.js" defer></script>
 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="randomBackgroundTest.js"></script>
+  <script src="lessTraveled.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB30200sZiA3TCdbLm4KI7EoHlDWD8ZcY"></script>
 </body>
 
 </html>
->>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50

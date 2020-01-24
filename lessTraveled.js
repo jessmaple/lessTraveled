@@ -1,6 +1,6 @@
 //Object to link state with its abbreviation. NPS api call requires the abbreviation
-var stateCenter = {};
- stupidCount = 0;
+var stateCenter = { lat: 0, lng: 0 };
+stupidCount = 0;
 var npsQuery = "";
 var state = "";
 var responseArray = [];
@@ -182,12 +182,46 @@ function giveEverything() {
         console.log("response: ");
         console.log(responseArray[i].res);
       }
+      //Set center of map
+      stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
+      //make map
+      map = new google.maps.Map(
+        document.getElementById('map'), {
+        zoom: 8, center: stateCenter
+      });
+      var parksArray = responseArray[6].res.data;
+      for (let i = 0; i < parksArray.length; i++) {
+        const ele = parksArray[i];
+        var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
+        var latLng = new google.maps.LatLng(latLongArray[0], latLongArray[1]);
+        var marker = new google.maps.Marker({
+          position: latLng,
+          map: map,
+          title: ele.fullName
+        });
+      }
+      //make map fit markers
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < markers.length; i++) {
+        bounds.extend(markers[i]);
+      }
       //DISPLAY MODAL
       $(".btn-1").click();
     } else {
       giveEverything();
     }
   });
+}
+
+// Map JS
+var map;
+function initMap() {
+
+}
+
+
+function markMap() {
+
 }
 
 appendStates()
@@ -230,26 +264,6 @@ $("#states").on("change", function () {
   giveEverything();
 });
 
-// Map JS
 
-var map;
-function initMap() {
-  console.log("the state name iiiis: " + stateName);
-  stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long};
-  console.log(stateCenter);
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat:63.734353 , lng:-148.912016 },
-    zoom: 4
-  });
-}
-
-// function initMap() {
-//   var stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long};
-
-//   var map = new google.maps.Map(
-//     document.getElementById('map'), {
-//     zoom: 4, center: stateCenter
-//   });
-// }
 
 

@@ -29,7 +29,7 @@
 
   </head>
 <!-- Landing Page -->
-  <body>
+  <body onload="randombg()">
    
     <div class="splash-modal">
       <input class="modal-state" id="modal-1" type="checkbox" />
@@ -57,7 +57,7 @@
      </div>
 
     </div>
-    <div class="splash-container">
+    <div id="splash-container" class="splash-container">
       <div class="splash">
         <h1 class="splash-head">
           <img
@@ -147,11 +147,11 @@
       </div>
     </div>
 
-    <div class="header">
+    <!-- <div class="header">
       <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="">lessTraveled</a>
       </div>
-    </div>
+    </div> -->
 
   
     <!-- RESULTS MODAL PAGE -->
@@ -191,8 +191,9 @@
         </div>
      </div>
   </div> --> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="lessTraveled.js" defer></script>  
-    
-  </body>
+  
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="randomBackgroundTest.js"></script>  
+  <script src="lessTraveled.js"></script>  
 </html>

@@ -1,9 +1,11 @@
 //Object to link state with its abbreviation. NPS api call requires the abbreviation
-var stupidCount = 0;
+var stateCenter = {};
+ stupidCount = 0;
 var npsQuery = "";
 var state = "";
 var responseArray = [];
-var statecoords = {
+var stateName = "";
+var stateCoords = {
   Alabama: { lat: 32.806671, long: -86.791130 },
   Alaska: { lat: 61.370716, long: -152.404419 },
   Arizona: { lat: 33.729759, long: -111.431221 },
@@ -37,13 +39,24 @@ var statecoords = {
   "New Jersey": { lat: 40.298904, long: -74.521011 },
   "New Mexico": { lat: 34.840515, long: -106.248482 },
   "New York": { lat: 42.165726, long: -74.948051 },
-  Arizona: { lat: 0, long: 0 },
-  Arizona: { lat: 0, long: 0 },
-  Arizona: { lat: 0, long: 0 },
-  Arizona: { lat: 0, long: 0 },
-  Arizona: { lat: 0, long: 0 },
-  Arizona: { lat: 0, long: 0 }
-
+  "North Carolina": { lat: 35.630066, long: -79.806419 },
+  "North Dakota": { lat: 47.528912, long: -99.784012 },
+  Ohio: { lat: 40.388783, long: -82.764915 },
+  Oklahoma: { lat: 35.565342, long: -96.928917 },
+  Oregon: { lat: 44.572021, long: -122.070938 },
+  Pennsylvania: { lat: 40.590752, long: -77.209755 },
+  "Rhode Island": { lat: 41.680893, long: -71.511780 },
+  "South Carolina": { lat: 33.856892, long: -80.945007 },
+  "South Dakota": { lat: 44.299782, long: -99.438828 },
+  "Tennessee": { lat: 35.747845, long: -86.692345 },
+  "Texas": { lat: 31.054487, long: -97.563461 },
+  "Utah": { lat: 40.150032, long: -111.862434 },
+  Vermont: { lat: 44.045876, long: -72.710686 },
+  Virginia: { lat: 37.769337, long: -78.169968 },
+  Washington: { lat: 47.400902, long: -121.490494 },
+  "West Virginia": { lat: 38.491226, long: -80.954453 },
+  Wisconsin: { lat: 44.268543, long: -89.616508 },
+  Wyoming: { lat: 42.755966, long: -107.302490 }
 };
 var stateKeys = {
   Alabama: "AL",
@@ -183,7 +196,8 @@ $("#states").on("change", function () {
   console.log($(this).val());
 
   //Set state variable to user-selected state
-  state = stateKeys[$(this).val()];
+  stateName = $(this).val();
+  state = stateKeys[stateName];
   //API npsQuery
   npsQuery = "stateCode=";
   //Set seperate spans for static text Loading and animated dots...
@@ -216,18 +230,23 @@ $("#states").on("change", function () {
 
 // Map JS
 
+var map;
 function initMap() {
-  responseArray
-  var statecoords = { lat: 63.734353, lng: -148.912016 };
-
-  var map = new google.maps.Map(
-    document.getElementById('map'), {
-    zoom: 4, center: Denali
+  stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long};
+  console.log(stateCenter);
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat:63.734353 , lng:-148.912016 },
+    zoom: 8
   });
-
-  var marker = new google.maps.Marker({
-    position: Denali, map: map
-  })
 }
+
+// function initMap() {
+//   var stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long};
+
+//   var map = new google.maps.Map(
+//     document.getElementById('map'), {
+//     zoom: 4, center: stateCenter
+//   });
+// }
 
 

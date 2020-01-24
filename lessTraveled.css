@@ -90,10 +90,11 @@ a.pure-button-primary {
 .home-menu {
   padding: 0.5em;
   text-align: center;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px wheat;
 }
 .home-menu {
-  background: #2d3e50;
+  background: whitesmoke;
+  opacity: 0.7;
 }
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
@@ -137,7 +138,11 @@ a.pure-button-primary {
   top: 0;
   left: 0;
   position: fixed !important;
+<<<<<<< HEAD
   background-image: url(images/background_10.jpg);
+=======
+  background-image: url(images/background1.jpg);
+>>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
   /* background-size: cover; */
   height: 100vh;
   background-size: 110% 110%;
@@ -234,8 +239,12 @@ a.pure-button-primary {
 
 /* This is the class used for the footer */
 .footer {
+<<<<<<< HEAD
   background: #111;
   opacity: 0.7;
+=======
+  background: rgba(255, 255, 255, 0.5);
+>>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -431,7 +440,7 @@ body {
 
 .btn {
   cursor: pointer;
-  background: #27ae60;
+  background:chocolate;
   display: inline-block;
   padding: 0.5em 1em;
   color: #fff;
@@ -440,7 +449,7 @@ body {
 
 .btn:hover,
 .btn:focus {
-  background: #2ecc71;
+  background: pink;
 }
 
 .btn:active {

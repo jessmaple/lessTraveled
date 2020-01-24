@@ -233,8 +233,7 @@ a.pure-button-primary {
 
 /* This is the class used for the footer */
 .footer {
-  background: white;
-  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.5);
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -430,7 +429,7 @@ body {
 
 .btn {
   cursor: pointer;
-  background: #27ae60;
+  background:chocolate;
   display: inline-block;
   padding: 0.5em 1em;
   color: #fff;
@@ -439,7 +438,7 @@ body {
 
 .btn:hover,
 .btn:focus {
-  background: #2ecc71;
+  background: pink;
 }
 
 .btn:active {

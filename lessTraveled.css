@@ -138,11 +138,7 @@ a.pure-button-primary {
   top: 0;
   left: 0;
   position: fixed !important;
-<<<<<<< HEAD
-  background-image: url(images/background_10.jpg);
-=======
   background-image: url(images/background1.jpg);
->>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
   /* background-size: cover; */
   height: 100vh;
   background-size: 110% 110%;
@@ -239,15 +235,15 @@ a.pure-button-primary {
 
 /* This is the class used for the footer */
 .footer {
-<<<<<<< HEAD
-  background: #111;
-  opacity: 0.7;
-=======
-  background: rgba(255, 255, 255, 0.5);
->>>>>>> cc4dc7c3e99b16138e9e85690b00292530e22b50
+  background-color: rgba(255, 255, 255, 0.5);
   position: fixed;
   bottom: 0;
   width: 100%;
+  visibility: visible;
+}
+
+#footer-text{
+  color: black;
 }
 
 /*
@@ -335,7 +331,6 @@ a.pure-button-primary {
 .modal-state:checked + .modal {
   opacity: 1;
   visibility: visible;
-  visibility: ;
 }
 
 .modal-state:checked + .modal .modal__park {

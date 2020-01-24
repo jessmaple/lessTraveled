@@ -183,7 +183,7 @@ function giveEverything() {
         console.log(responseArray[i].res);
       }
       //DISPLAY MODAL
-      $("label.btn")[0].click();
+      $(".btn-1").click();
     } else {
       giveEverything();
     }
@@ -198,6 +198,8 @@ $("#states").on("change", function () {
   //Set state variable to user-selected state
   stateName = $(this).val();
   state = stateKeys[stateName];
+  //Make map from state
+  initMap();
   //API npsQuery
   npsQuery = "stateCode=";
   //Set seperate spans for static text Loading and animated dots...
@@ -232,11 +234,12 @@ $("#states").on("change", function () {
 
 var map;
 function initMap() {
+  console.log("the state name iiiis: " + stateName);
   stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long};
   console.log(stateCenter);
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat:63.734353 , lng:-148.912016 },
-    zoom: 8
+    zoom: 4
   });
 }
 

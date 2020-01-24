@@ -90,10 +90,11 @@ a.pure-button-primary {
 .home-menu {
   padding: 0.5em;
   text-align: center;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px wheat;
 }
 .home-menu {
-  background: #2d3e50;
+  background: whitesmoke;
+  opacity: 0.7;
 }
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
@@ -137,7 +138,7 @@ a.pure-button-primary {
   top: 0;
   left: 0;
   position: fixed !important;
-  background-image: url(images/landing.png);
+  background-image: url(images/background1.jpg);
   /* background-size: cover; */
   height: 100vh;
   background-size: 110% 110%;
@@ -232,7 +233,8 @@ a.pure-button-primary {
 
 /* This is the class used for the footer */
 .footer {
-  background: #111;
+  background: white;
+  opacity: 0.7;
   position: fixed;
   bottom: 0;
   width: 100%;

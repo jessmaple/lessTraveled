@@ -241,6 +241,7 @@ a.pure-button-primary {
   bottom: 0;
   width: 100%;
   visibility: visible;
+  padding: 0%;
 }
 
 #footer-text{
@@ -277,6 +278,7 @@ a.pure-button-primary {
   .splash {
     width: 50%;
     height: 50%;
+    margin-top: 0%;
   }
 
   .splash-head {

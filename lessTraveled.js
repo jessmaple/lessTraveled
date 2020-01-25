@@ -131,7 +131,7 @@ var npsApiKey = "&api_key=IhxOqwarmUrf63on2XfYUZpmkMZxKxOBFY6hZ0aW";
 var npsApiURL = "https://developer.nps.gov/api/v1/";
 
 //Create array of endpoints
-var npsEndpointArray = [
+var fullNpsEndpointArray = [
   "alerts?",
   "articles?",
   "campgrounds?",
@@ -143,6 +143,8 @@ var npsEndpointArray = [
   "places?",
   "visitorcenters?"
 ];
+
+var npsEndpointArray = ["parks?"];
 
 //Dropdown menu
 var stateSelect = $("#states");
@@ -159,7 +161,7 @@ function appendStates() {
 function giveEverything() {
   var curEndPoint = npsEndpointArray.shift();
   $.ajax({
-    url: npsApiURL + curEndPoint + npsQuery + state + npsApiKey,
+    url: npsApiURL + curEndPoint + npsQuery + state + "&fields=images" + npsApiKey,
     method: "GET"
   }).then(function (response) {
     console.log("loop " + ++giveEverythingCount);
@@ -180,15 +182,15 @@ function giveEverything() {
         console.log("response: ");
         console.log(responseArray[i].res);
       }
-      console.log(responseArray[6].res.data.length);
-      if (responseArray[6].res.data.length === 0) {
+      console.log(responseArray[0].res.data.length);
+      if (responseArray[0].res.data.length === 0) {
         alert("no parks in " + stateName);
       } else {
         //Set center of map
         //make map
         var map = new google.maps.Map(document.getElementById('map'));
 
-        var parksArray = responseArray[6].res.data;
+        var parksArray = responseArray[0].res.data;
         var bounds = new google.maps.LatLngBounds();
         var setMarkersCount = 0;
 
@@ -215,20 +217,39 @@ function giveEverything() {
               for (let i = 0; i < parksArray.length; i++) {
                 const ele = parksArray[i];
                 resultDiv = $("<div>").addClass("result-div result-div-" + i);
-                resultDiv.text(ele.fullName);
                 resultDiv.attr("data-fullname", ele.fullName);
                 resultDiv.attr("data-parkcode", ele.parkCode);
                 resultDiv.attr("data-description", ele.description);
                 resultDiv.attr("data-hours");
+                parkPhoto = $("<div>").addClass("result-thumb").css("background-image", `url(${ele.images[0].url})`);
+                resultDivTitle = $("<h5>").addClass("result-div-title").text(ele.fullName);
                 console.log(ele.fullName);
+                resultDiv.append(parkPhoto);
+                resultDiv.append(resultDivTitle);
                 $("#results-column").append(resultDiv);
-                resultDiv.click(function(event){
-                  $(".splash-modal").hide();
-                  $("#park-page").show();
+                resultDiv.append(parkPhoto);
+
+                resultDiv.click(function (event) {
                   var parkCode = $(this).attr("data-parkcode");
                   var description = $(this).attr("data-description");
-                  console.log(parkCode);
-                  console.log(description);
+                  npsQuery = "parkCode=";
+                  $.ajax({
+                    url: npsApiURL + curEndPoint + npsQuery + parkCode + "&fields=images,operatingHours,addresses" + npsApiKey,
+                    method: "GET"
+                  }).then(function (response) {
+                    console.log(response);
+                    $(".splash-modal").hide();
+                    $("#park-page").show();
+                    $(".btn-2").click();
+                    $("#park-name").text(response.data[0].fullName);
+                    $(".park-page-img").attr("src", response.data[0].images[0].url);
+                    if (response.data[0].operatingHours[0].description) {
+                      $("#park-hours").text(`Hours: ${response.data[0].operatingHours[0].description}`);
+                    }
+                    $("#park-address").text(`Address: ${response.data[0].addresses[0].line1} ${response.data[0].addresses[0].line2}, ${response.data[0].addresses[0].city}, ${response.data[0].addresses[0].stateCode}, ${response.data[0].addresses[0].postalCode}`);
+                    $("#forcast").text(`Weather Information: ${response.data[0].weatherInfo}`)
+                    $("#park-site").attr("href", response.data[0].url);
+                  });
                 });
               }
             }

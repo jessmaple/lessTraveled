@@ -172,6 +172,7 @@ a.pure-button-primary {
 
 /* This is the main heading that appears on the blue section */
 .splash-head {
+  position: relative;
   font-size: 20px;
   font-weight: bold;
   padding: 1em 1.6em;
@@ -515,11 +516,15 @@ p img {
   width: 100%;
 }
 
-
 /* Pure loader animation */
 .lds-ripple {
   display: inline-block;
-  position: relative;
+  position: absolute;
+left: 50%;
+bottom: 50%;
+  /* -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%); */
+  transform: translate(-249.2%, -250%);
   width: 80px;
   height: 80px;
 }
@@ -535,8 +540,8 @@ p img {
 }
 @keyframes lds-ripple {
   0% {
-    top: 36px;
-    left: 36px;
+    top: 200px;
+    left: 200px;
     width: 0;
     height: 0;
     opacity: 1;
@@ -544,8 +549,8 @@ p img {
   100% {
     top: 0px;
     left: 0px;
-    width: 72px;
-    height: 72px;
+    width: 400px;
+    height: 400px;
     opacity: 0;
   }
 }

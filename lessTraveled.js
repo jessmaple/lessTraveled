@@ -19,6 +19,7 @@ var stateCoords = {
   "District of Columbia": { lat: 38.897438, long: -77.026817 },
   Florida: { lat: 27.766279, long: -81.686783 },
   Georgia: { lat: 33.040619, long: -83.643074 },
+  Guam: { lat: 13.4443, long: 144.7937 },
   Hawaii: { lat: 21.094318, long: -157.498337 },
   Idaho: { lat: 44.240459, long: -114.478828 },
   Illinois: { lat: 40.349457, long: -88.986137 },
@@ -72,7 +73,6 @@ var stateKeys = {
   Connecticut: "CT",
   Delaware: "DE",
   "District Of Columbia": "DC",
-  "Federated States Of Micronesia": "FM",
   Florida: "FL",
   Georgia: "GA",
   Guam: "GU",
@@ -177,7 +177,7 @@ function giveEverything() {
     //Stop the animation interval and clear its elements display response
     //if finished
     if (npsEndpointArray.length < 1) {
-      // clearInterval(loadingAnimation);
+
       //Logging response
       for (let i = 0; i < responseArray.length; i++) {
         console.log("--------------------------------")
@@ -185,70 +185,92 @@ function giveEverything() {
         console.log("response: ");
         console.log(responseArray[i].res);
       }
-      //Set center of map
-      stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
+      console.log(responseArray[6].res.data.length);
+      if (responseArray[6].res.data.length === 0) {
+        alert("no parks in " + stateName);
+      } else {
+        //Set center of map
 
-      //make map
-      var map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: stateCenter });
 
-      var parksArray = responseArray[6].res.data;
-      var bounds = new google.maps.LatLngBounds();
-      var setMarkersCount = 0;
-      function setMarkers() {
-        function reiterator(){
-          setMarkersCount++;
-          if (setMarkersCount < parksArray.length) {
-            setMarkers();
+        //make map
+        var map = new google.maps.Map(document.getElementById('map'));
+
+        var parksArray = responseArray[6].res.data;
+        var bounds = new google.maps.LatLngBounds();
+        var setMarkersCount = 0;
+
+        function setMarkers() {
+
+          function reiterator() {
+            setMarkersCount++;
+            console.log("park array length is " + parksArray.length);
+            if (setMarkersCount < parksArray.length) {
+              setMarkers();
+            } else {
+              if (parksArray.length <= 1) {
+                map.setZoom(8);
+                map.setCenter(myLatLng);
+              } else {
+                map.fitBounds(bounds, 20);
+              }
+              $(".lds-ripple").remove();
+            }
+          }
+
+          //do we even get coords? if coords is not empty, do things
+          if (parksArray[setMarkersCount].latLong !== "") {
+            const ele = parksArray[setMarkersCount];
+            var parkCoords = [];
+            var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
+            var myLat = parseFloat(latLongArray[0]);
+            var myLng = parseFloat(latLongArray[1]);
+            var myLatLng = new google.maps.LatLng(myLat, myLng);
+            $.ajax({
+              url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${myLat},${myLng}&key=${jessMapsApiKey}`,
+              method: "GET"
+            }).then(function (response) {
+
+              // console.log(response.results[response.results.length -2].address_components[0].short_name);
+              console.log(response.results);
+              if (state !== "AS") {
+                var stateOfMarker = response.results[response.results.length - 2].address_components[0].short_name;
+              }
+              if (
+                (stateOfMarker === state) ||
+                state === "GU" ||
+                state === "AS" ||
+                state === "MP" ||
+                state === "PR") {
+                console.log("here " + setMarkersCount);
+                var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  title: ele.fullName
+                });
+                bounds.extend(myLatLng);
+                // marker.setMap(map);
+                // extend boundry at mark
+                reiterator()
+              } else {
+                reiterator()
+              }
+            });
           } else {
-            map.fitBounds(bounds, 1);
-            $(".lds-ripple").remove();
+            reiterator()
           }
         }
-        //do we even get coords? if coords is not empty, do things
-        if (parksArray[setMarkersCount].latLong !== "") {
-          const ele = parksArray[setMarkersCount];
-          var parkCoords = [];
-          var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
-          var myLat = parseFloat(latLongArray[0]);
-          var myLng = parseFloat(latLongArray[1]);
-          var myLatLng = new google.maps.LatLng(myLat, myLng);
-          $.ajax({
-            url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${myLat},${myLng}&key=${jessMapsApiKey}`,
-            method: "GET"
-          }).then(function (response) {
+        setMarkers();
 
-            // console.log(response.results[response.results.length -2].address_components[0].short_name);
-            var stateOfMarker = response.results[response.results.length - 2].address_components[0].short_name;
-            if (stateOfMarker === state) {
-              // console.log("here " + setMarkersCount);
-              var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: ele.fullName
-              });
-              bounds.extend(myLatLng);
-              // marker.setMap(map);
-              // extend boundry at mark
-              reiterator()
-            } else {
-              reiterator()
-            }
-          });
-        } else {
-          reiterator()
-        }
+
+        console.log("hello");
+        //make map fit markers
+        // map.fitBounds(bounds);
+        // console.log("parkCoords: ");
+        // console.log(parkCoords);
+
+
+        $(".btn-1").click();
       }
-      setMarkers();
-
-
-      console.log("hello");
-      //make map fit markers
-      // map.fitBounds(bounds);
-      // console.log("parkCoords: ");
-      // console.log(parkCoords);
-
-
-      $(".btn-1").click();
     } else {
       giveEverything();
     }
@@ -266,7 +288,7 @@ appendStates()
 
 $("#states").on("change", function () {
   //start loader animation
-  $(".splash").append('<div class="lds-ripple"><div></div><div></div></div>');
+  $(".splash-head").append('<div class="lds-ripple"><div></div><div></div></div>');
   //Set state variable to user-selected state
   stateName = $(this).val();
   state = stateKeys[stateName];

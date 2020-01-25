@@ -221,7 +221,11 @@ function giveEverything() {
                 resultDiv.attr("data-parkcode", ele.parkCode);
                 resultDiv.attr("data-description", ele.description);
                 resultDiv.attr("data-hours");
-                parkPhoto = $("<div>").addClass("result-thumb").css("background-image", `url(${ele.images[0].url})`);
+                if (ele.images.length > 0){
+                  parkPhoto = $("<div>").addClass("result-thumb").css("background-image", `url(${ele.images[0].url})`);
+                } else {
+                  parkPhoto = $("<div>").addClass("result-thumb").text("picture unavailable");
+                }
                 resultDivTitle = $("<h5>").addClass("result-div-title").text(ele.fullName);
                 console.log(ele.fullName);
                 resultDiv.append(parkPhoto);
@@ -242,7 +246,9 @@ function giveEverything() {
                     $("#park-page").show();
                     $(".btn-2").click();
                     $("#park-name").text(response.data[0].fullName);
-                    $(".park-page-img").attr("src", response.data[0].images[0].url);
+                    if (response.data[0].images.length > 0){
+                      $(".park-page-img").attr("src", response.data[0].images[0].url);
+                    }
                     if (response.data[0].operatingHours[0].description) {
                       $("#park-hours").text(`Hours: ${response.data[0].operatingHours[0].description}`);
                     }

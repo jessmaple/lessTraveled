@@ -188,12 +188,20 @@ function giveEverything() {
       stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
 
       //make map
-      var map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: stateCenter});
+      var map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: stateCenter });
 
       var parksArray = responseArray[6].res.data;
       var bounds = new google.maps.LatLngBounds();
       var setMarkersCount = 0;
       function setMarkers() {
+        function reiterator(){
+          setMarkersCount++;
+          if (setMarkersCount < parksArray.length) {
+            setMarkers();
+          } else {
+            map.fitBounds(bounds, 3);
+          }
+        }
         //do we even get coords? if coords is not empty, do things
         if (parksArray[setMarkersCount].latLong !== "") {
           const ele = parksArray[setMarkersCount];
@@ -207,30 +215,25 @@ function giveEverything() {
             method: "GET"
           }).then(function (response) {
 
-            console.log(response.results[response.results.length -2].address_components);
-            console.log("here " + setMarkersCount);
-            var marker = new google.maps.Marker({
-              position: myLatLng,
-              map: map,
-              title: ele.fullName
-            });
-            bounds.extend(myLatLng);
-            // marker.setMap(map);
-            // extend boundry at mark
-            setMarkersCount++;
-            if (setMarkersCount < parksArray.length) {
-              setMarkers();
+            // console.log(response.results[response.results.length -2].address_components[0].short_name);
+            var stateOfMarker = response.results[response.results.length - 2].address_components[0].short_name;
+            if (stateOfMarker === state) {
+              // console.log("here " + setMarkersCount);
+              var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: ele.fullName
+              });
+              bounds.extend(myLatLng);
+              // marker.setMap(map);
+              // extend boundry at mark
+              reiterator()
             } else {
-              map.fitBounds(bounds);
+              reiterator()
             }
           });
         } else {
-          setMarkersCount++;
-          if (setMarkersCount < parksArray.length) {
-            setMarkers();
-          } else {
-            map.fitBounds(bounds);
-          }
+          reiterator()
         }
       }
       setMarkers();

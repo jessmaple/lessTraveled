@@ -185,7 +185,7 @@ function giveEverything() {
       }
       //Set center of map
       stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
-      
+
       //make map
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 5, center: stateCenter
@@ -194,7 +194,12 @@ function giveEverything() {
       var parksArray = responseArray[6].res.data;
       var bounds = new google.maps.LatLngBounds();
       for (let i = 0; i < parksArray.length; i++) {
-        console.log ("here " + i);
+        console.log(i);
+        console.log(parksArray.length - 1);
+        if (parksArray[i].latLong === "") {
+          continue;
+        }
+        console.log("here " + i);
         const ele = parksArray[i];
         var parkCoords = [];
         var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");

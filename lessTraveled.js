@@ -1,10 +1,12 @@
-//Object to link state with its abbreviation. NPS api call requires the abbreviation
+var jessMapsApiKey = "AIzaSyAB30200sZiA3TCdbLm4KI7EoHlDWD8ZcY";
 var stateCenter = { lat: 0, lng: 0 };
-stupidCount = 0;
+var stupidCount = 0;
+var giveEverythingCount = 0;
 var npsQuery = "";
 var state = "";
 var responseArray = [];
 var stateName = "";
+//Object to link state with its center coordinates
 var stateCoords = {
   Alabama: { lat: 32.806671, long: -86.791130 },
   Alaska: { lat: 61.370716, long: -152.404419 },
@@ -58,6 +60,7 @@ var stateCoords = {
   Wisconsin: { lat: 44.268543, long: -89.616508 },
   Wyoming: { lat: 42.755966, long: -107.302490 }
 };
+//Object to link state with its abbreviation. NPS api call requires the abbreviation
 var stateKeys = {
   Alabama: "AL",
   Alaska: "AK",
@@ -164,7 +167,7 @@ function giveEverything() {
     url: npsApiURL + curEndPoint + npsQuery + state + npsApiKey,
     method: "GET"
   }).then(function (response) {
-    console.log("loop " + stupidCount);
+    console.log("loop " + ++giveEverythingCount);
     //store response in responsearray
     responseArray.push({
       endPoint: curEndPoint,
@@ -184,28 +187,67 @@ function giveEverything() {
       }
       //Set center of map
       stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
+
       //make map
-      map = new google.maps.Map(
-        document.getElementById('map'), {
-        zoom: 8, center: stateCenter
-      });
+      var map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: stateCenter });
+
       var parksArray = responseArray[6].res.data;
-      for (let i = 0; i < parksArray.length; i++) {
-        const ele = parksArray[i];
-        var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
-        var latLng = new google.maps.LatLng(latLongArray[0], latLongArray[1]);
-        var marker = new google.maps.Marker({
-          position: latLng,
-          map: map,
-          title: ele.fullName
-        });
-      }
-      //make map fit markers
       var bounds = new google.maps.LatLngBounds();
-      for (var i = 0; i < markers.length; i++) {
-        bounds.extend(markers[i]);
+      var setMarkersCount = 0;
+      function setMarkers() {
+        function reiterator(){
+          setMarkersCount++;
+          if (setMarkersCount < parksArray.length) {
+            setMarkers();
+          } else {
+            map.fitBounds(bounds, 1);
+            $(".lds-ripple").remove();
+          }
+        }
+        //do we even get coords? if coords is not empty, do things
+        if (parksArray[setMarkersCount].latLong !== "") {
+          const ele = parksArray[setMarkersCount];
+          var parkCoords = [];
+          var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
+          var myLat = parseFloat(latLongArray[0]);
+          var myLng = parseFloat(latLongArray[1]);
+          var myLatLng = new google.maps.LatLng(myLat, myLng);
+          $.ajax({
+            url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${myLat},${myLng}&key=${jessMapsApiKey}`,
+            method: "GET"
+          }).then(function (response) {
+
+            // console.log(response.results[response.results.length -2].address_components[0].short_name);
+            var stateOfMarker = response.results[response.results.length - 2].address_components[0].short_name;
+            if (stateOfMarker === state) {
+              // console.log("here " + setMarkersCount);
+              var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: ele.fullName
+              });
+              bounds.extend(myLatLng);
+              // marker.setMap(map);
+              // extend boundry at mark
+              reiterator()
+            } else {
+              reiterator()
+            }
+          });
+        } else {
+          reiterator()
+        }
       }
-      //DISPLAY MODAL
+      setMarkers();
+
+
+      console.log("hello");
+      //make map fit markers
+      // map.fitBounds(bounds);
+      // console.log("parkCoords: ");
+      // console.log(parkCoords);
+
+
       $(".btn-1").click();
     } else {
       giveEverything();
@@ -216,19 +258,15 @@ function giveEverything() {
 // Map JS
 var map;
 function initMap() {
-
 }
-
-
 function markMap() {
-
 }
 
 appendStates()
 
 $("#states").on("change", function () {
-  console.log($(this).val());
-
+  //start loader animation
+  $(".splash").append('<div class="lds-ripple"><div></div><div></div></div>');
   //Set state variable to user-selected state
   stateName = $(this).val();
   state = stateKeys[stateName];
@@ -237,24 +275,22 @@ $("#states").on("change", function () {
   //API npsQuery
   npsQuery = "stateCode=";
   //Set seperate spans for static text Loading and animated dots...
-  var loadSpan = $("<span>").text("Loading");
-  var dotSpan = $("<span>").text(".");
 
   //Counting variable for the following interval. (Probably could be used in a cleaner way)
   var stupidCount = 0;
   //Interval for animating dots
-  var loadingAnimation = setInterval(function () {
-    //Once count reaches 11
-    if (stupidCount > 10) {
-      //Clear the dots and restart stupidCount
-      dotSpan.empty();
-      stupidCount = 0;
-    }
-    //Continue adding dots
-    dotSpan.text(dotSpan.text() + ".");
-    //Incriment stupidCount
-    stupidCount++;
-  }, 250);
+  // var loadingAnimation = setInterval(function () {
+  //   //Once count reaches 11
+  //   if (stupidCount > 10) {
+  //     //Clear the dots and restart stupidCount
+  //     dotSpan.empty();
+  //     stupidCount = 0;
+  //   }
+  //   //Continue adding dots
+  //   dotSpan.text(dotSpan.text() + ".");
+  //   //Incriment stupidCount
+  //   stupidCount++;
+  // }, 250);
 
 
   // Recursive API call

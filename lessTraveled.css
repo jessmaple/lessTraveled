@@ -138,7 +138,7 @@ a.pure-button-primary {
   top: 0;
   left: 0;
   position: fixed !important;
-  background-image: url(images/background1.jpg);
+  /* background-image: url(images/background_1.jpg); */
   /* background-size: cover; */
   height: 100vh;
   background-size: 110% 110%;
@@ -384,7 +384,7 @@ a.pure-button-primary {
 }
 
 #results-column {
-  background-color: hotpink;
+  background-color: rgb(255, 105, 180);
   width: 67%;
 }
 
@@ -482,6 +482,11 @@ p img {
   left: 30vh;
   top: 15vh;
 }
+
+#park-page{
+  visibility: hidden;
+}
+
 /* Park Modal */
 .modal {
   opacity: 0;
@@ -555,4 +560,13 @@ bottom: 50%;
     height: 400px;
     opacity: 0;
   }
+}
+
+.result-div{
+  cursor: pointer;
+  background-color: rgb(255, 105, 180);
+}
+
+.result-div:hover{
+  background-color: rgb(255, 157, 206);;
 }

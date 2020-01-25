@@ -29,12 +29,14 @@
       <div class="modal__results">
         <div class="pure-g">
           <!-- Google Maps -->
-          <div id="map-column" class="pure-u-1-2 columns">MAP - DELETE ME
+          <div id="map-column" class="pure-u-1-2 columns">
             <div id="map">
               <!-- replace value with key paramater with api key -->
             </div>
           </div>
-          <div id="results-column" class="pure-u-1-2 columns">RESULTS - DELETE ME</div>
+          <div id="results-column" class="pure-u-1-2 columns">
+
+          </div>
           <label class="btn-1" for="modal-1"> X </label>
         </div>
       </div>
@@ -44,9 +46,7 @@
   <div id="splash-container" class="splash-container">
     <div class="splash">
       <h1 class="splash-head">
-
         <img src="assets/lessTraveled_logo_4_white.PNG" width="323" height="150.5" alt="lessTraveled logo" />
-
       </h1>
       <p class="splash-subhead">
         Choose your path
@@ -83,36 +83,35 @@
     < MODAL WINDOWN -->
   <!-- <input class="modal-state" id="modal-1" type="checkbox" /> -->
 
-  </div>
 
   <!-- PARK MODAL PAGE -->
   <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
-  <!-- <div id="park-page">
-    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label> -->
-  <!-- MODAL WINDOWN -->
-  <!-- <input class="modal-state" id="modal-1" type="checkbox" />
+  <div id="park-page">
+    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
     <div class="modal">
-        <label class="modal__bg" for="modal-1"></label>
-        <div class="modal__park">
-            <label class="modal__close" for="modal-1"></label>
-            <h2 id="park-name"></h2>
-            <p>
-                <img />
-                <p id="park-description"></p>
-                <br>
-                <br> -->
-  <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
-  <!-- <p id="park-hours"></p>
-                <br>
-                <p id="park-address"></p>
-                <br>
-                <div id="forcast" style="background-color: lightgrey;">forcast</div>
-                <br>
-                Click <a id="park-site" href="">here</a> to visit the official park website.
-            </p>
-        </div>
-     </div>
-  </div> -->
+      <label class="modal__bg" for="modal-1"></label>
+      <div class="modal__park">
+        <label class="modal__close" for="modal-1"></label>
+        <h2 id="park-name"></h2>
+        <p>
+          <img />
+          <p id="park-description"></p>
+          <br>
+          <br>
+          <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
+          <p id="park-hours"></p>
+          <br>
+          <p id="park-address"></p>
+          <br>
+          <div id="forcast" style="background-color: lightgrey;">forcast</div>
+          <br>
+          Click <a id="park-site" href="">here</a> to visit the official park website.
+        </p>
+      </div>
+    </div>
+  </div>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

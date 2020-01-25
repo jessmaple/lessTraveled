@@ -1,4 +1,5 @@
 //Object to link state with its abbreviation. NPS api call requires the abbreviation
+var jessMapsApiKey = "AIzaSyAB30200sZiA3TCdbLm4KI7EoHlDWD8ZcY";
 var stateCenter = { lat: 0, lng: 0 };
 var stupidCount = 0;
 var giveEverythingCount = 0;
@@ -187,35 +188,54 @@ function giveEverything() {
       stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
 
       //make map
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 5, center: stateCenter
-      });
+      var map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: stateCenter});
 
       var parksArray = responseArray[6].res.data;
       var bounds = new google.maps.LatLngBounds();
-      for (let i = 0; i < parksArray.length; i++) {
-        console.log(i);
-        console.log(parksArray.length - 1);
-        if (parksArray[i].latLong === "") {
-          continue;
+      var setMarkersCount = 0;
+      function setMarkers() {
+        //do we even get coords? if coords is not empty, do things
+        if (parksArray[setMarkersCount].latLong !== "") {
+          const ele = parksArray[setMarkersCount];
+          var parkCoords = [];
+          var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
+          var myLat = parseFloat(latLongArray[0]);
+          var myLng = parseFloat(latLongArray[1]);
+          var myLatLng = new google.maps.LatLng(myLat, myLng);
+          $.ajax({
+            url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${myLat},${myLng}&key=${jessMapsApiKey}`,
+            method: "GET"
+          }).then(function (response) {
+
+            console.log(response.results[response.results.length -2].address_components);
+            console.log("here " + setMarkersCount);
+            var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              title: ele.fullName
+            });
+            bounds.extend(myLatLng);
+            // marker.setMap(map);
+            // extend boundry at mark
+            setMarkersCount++;
+            if (setMarkersCount < parksArray.length) {
+              setMarkers();
+            } else {
+              map.fitBounds(bounds);
+            }
+          });
+        } else {
+          setMarkersCount++;
+          if (setMarkersCount < parksArray.length) {
+            setMarkers();
+          } else {
+            map.fitBounds(bounds);
+          }
         }
-        console.log("here " + i);
-        const ele = parksArray[i];
-        var parkCoords = [];
-        var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
-        console.log(latLongArray[0])
-        var myLat = parseFloat(latLongArray[0]);
-        var myLng = parseFloat(latLongArray[1]);
-        var myLatLng = new google.maps.LatLng(myLat, myLng);
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: ele.fullName
-        });
-        // extend boundry at mark
-        bounds.extend(myLatLng);
       }
-      map.fitBounds(bounds);
+      setMarkers();
+
+
       console.log("hello");
       //make map fit markers
       // map.fitBounds(bounds);

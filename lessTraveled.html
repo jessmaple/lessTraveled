@@ -43,6 +43,35 @@
     </div>
   </div>
 
+    <!-- PARK MODAL PAGE -->
+  <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
+  <div id="park-page">
+    <label class="btn-2" for="modal-2" id="park-button">Yellowstone National Park</label>
+    <!-- MODAL WINDOWN -->
+    <input class="modal-state" id="modal-2" type="checkbox" />
+    <div class="modal">
+      <label class="modal__bg" for="modal-2"></label>
+      <div class="modal__park">
+        <label class="modal__close" for="modal-2"></label>
+        <h2 id="park-name"></h2>
+        <p>
+          <img class="park-page-img"/>
+          <p id="park-description"></p>
+          <br>
+          <br>
+          <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
+          <p id="park-hours"></p>
+          <br>
+          <p id="park-address"></p>
+          <br>
+          <div id="forcast" style="background-color: lightgrey;"></div>
+          <br>
+          Click <a id="park-site" href="">here</a> to visit the official park website.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div id="splash-container" class="splash-container">
     <div class="splash">
       <h1 class="splash-head">
@@ -65,7 +94,6 @@
     </div>
     <div class="footer l-box is-center">
       <span id="footer-text">Made by Aaron, Alan, & Jess</span>
-      <label class="btn" for="modal-1">Show me modal with a cat</label>
     </div>
   </div>
 
@@ -82,37 +110,6 @@
     <label class="btn" for="modal-1" id="park-button">DELETE ME</label>
     < MODAL WINDOWN -->
   <!-- <input class="modal-state" id="modal-1" type="checkbox" /> -->
-
-
-  <!-- PARK MODAL PAGE -->
-  <!-- WE WONT NEED THIS BUTTON... BUTTONS WILL COME FROM THE RESUKTS PAGE -->
-  <div id="park-page">
-    <label class="btn" for="modal-1" id="park-button">Yellowstone National Park</label>
-    <!-- MODAL WINDOWN -->
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    <div class="modal">
-      <label class="modal__bg" for="modal-1"></label>
-      <div class="modal__park">
-        <label class="modal__close" for="modal-1"></label>
-        <h2 id="park-name"></h2>
-        <p>
-          <img />
-          <p id="park-description"></p>
-          <br>
-          <br>
-          <!-- API CODE MAY NOT WORK HERE BECAUSE HOURS AREN'T DEFINED IN THE RESULTS -->
-          <p id="park-hours"></p>
-          <br>
-          <p id="park-address"></p>
-          <br>
-          <div id="forcast" style="background-color: lightgrey;">forcast</div>
-          <br>
-          Click <a id="park-site" href="">here</a> to visit the official park website.
-        </p>
-      </div>
-    </div>
-  </div>
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="randomBackgroundTest.js"></script>

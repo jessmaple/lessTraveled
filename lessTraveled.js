@@ -152,12 +152,7 @@ function appendStates() {
   for (let i = 0; i < stateNames.length; i++) {
     const element = stateNames[i];
     var stateOption = $("<option>").val(stateNames[i]).text(stateNames[i]);
-    stateOption.click(function (event) {
-
-    });
-
     stateSelect.append(stateOption);
-
   }
 }
 
@@ -190,8 +185,6 @@ function giveEverything() {
         alert("no parks in " + stateName);
       } else {
         //Set center of map
-
-
         //make map
         var map = new google.maps.Map(document.getElementById('map'));
 
@@ -213,7 +206,31 @@ function giveEverything() {
               } else {
                 map.fitBounds(bounds, 20);
               }
+
+              //**********Load results page now**********
               $(".lds-ripple").remove();
+              $(".btn-1").click();
+              console.log("clicked btn-1");
+              console.log(parksArray);
+              for (let i = 0; i < parksArray.length; i++) {
+                const ele = parksArray[i];
+                resultDiv = $("<div>").addClass("result-div result-div-" + i);
+                resultDiv.text(ele.fullName);
+                resultDiv.attr("data-fullname", ele.fullName);
+                resultDiv.attr("data-parkcode", ele.parkCode);
+                resultDiv.attr("data-description", ele.description);
+                resultDiv.attr("data-hours");
+                console.log(ele.fullName);
+                $("#results-column").append(resultDiv);
+                resultDiv.click(function(event){
+                  $(".splash-modal").hide();
+                  $("#park-page").show();
+                  var parkCode = $(this).attr("data-parkcode");
+                  var description = $(this).attr("data-description");
+                  console.log(parkCode);
+                  console.log(description);
+                });
+              }
             }
           }
 
@@ -260,16 +277,6 @@ function giveEverything() {
           }
         }
         setMarkers();
-
-
-        console.log("hello");
-        //make map fit markers
-        // map.fitBounds(bounds);
-        // console.log("parkCoords: ");
-        // console.log(parkCoords);
-
-
-        $(".btn-1").click();
       }
     } else {
       giveEverything();
@@ -277,12 +284,6 @@ function giveEverything() {
   });
 }
 
-// Map JS
-var map;
-function initMap() {
-}
-function markMap() {
-}
 
 appendStates()
 
@@ -292,28 +293,8 @@ $("#states").on("change", function () {
   //Set state variable to user-selected state
   stateName = $(this).val();
   state = stateKeys[stateName];
-  //Make map from state
-  initMap();
   //API npsQuery
   npsQuery = "stateCode=";
-  //Set seperate spans for static text Loading and animated dots...
-
-  //Counting variable for the following interval. (Probably could be used in a cleaner way)
-  var stupidCount = 0;
-  //Interval for animating dots
-  // var loadingAnimation = setInterval(function () {
-  //   //Once count reaches 11
-  //   if (stupidCount > 10) {
-  //     //Clear the dots and restart stupidCount
-  //     dotSpan.empty();
-  //     stupidCount = 0;
-  //   }
-  //   //Continue adding dots
-  //   dotSpan.text(dotSpan.text() + ".");
-  //   //Incriment stupidCount
-  //   stupidCount++;
-  // }, 250);
-
 
   // Recursive API call
   // could be dangerous to break this. an infinite loop might

@@ -1,6 +1,7 @@
 //Object to link state with its abbreviation. NPS api call requires the abbreviation
 var stateCenter = { lat: 0, lng: 0 };
-stupidCount = 0;
+var stupidCount = 0;
+var giveEverythingCount = 0;
 var npsQuery = "";
 var state = "";
 var responseArray = [];
@@ -164,7 +165,7 @@ function giveEverything() {
     url: npsApiURL + curEndPoint + npsQuery + state + npsApiKey,
     method: "GET"
   }).then(function (response) {
-    console.log("loop " + stupidCount);
+    console.log("loop " + ++giveEverythingCount);
     //store response in responsearray
     responseArray.push({
       endPoint: curEndPoint,
@@ -184,28 +185,39 @@ function giveEverything() {
       }
       //Set center of map
       stateCenter = { lat: stateCoords[stateName].lat, lng: stateCoords[stateName].long };
+      
       //make map
-      map = new google.maps.Map(
-        document.getElementById('map'), {
-        zoom: 8, center: stateCenter
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 5, center: stateCenter
       });
+
       var parksArray = responseArray[6].res.data;
+      var bounds = new google.maps.LatLngBounds();
       for (let i = 0; i < parksArray.length; i++) {
+        console.log ("here " + i);
         const ele = parksArray[i];
+        var parkCoords = [];
         var latLongArray = ele.latLong.replace(/lat:/, '').replace(/ long:/, '').split(",");
-        var latLng = new google.maps.LatLng(latLongArray[0], latLongArray[1]);
+        console.log(latLongArray[0])
+        var myLat = parseFloat(latLongArray[0]);
+        var myLng = parseFloat(latLongArray[1]);
+        var myLatLng = new google.maps.LatLng(myLat, myLng);
         var marker = new google.maps.Marker({
-          position: latLng,
+          position: myLatLng,
           map: map,
           title: ele.fullName
         });
+        // extend boundry at mark
+        bounds.extend(myLatLng);
       }
+      map.fitBounds(bounds);
+      console.log("hello");
       //make map fit markers
-      var bounds = new google.maps.LatLngBounds();
-      for (var i = 0; i < markers.length; i++) {
-        bounds.extend(markers[i]);
-      }
-      //DISPLAY MODAL
+      // map.fitBounds(bounds);
+      // console.log("parkCoords: ");
+      // console.log(parkCoords);
+
+
       $(".btn-1").click();
     } else {
       giveEverything();
@@ -216,12 +228,8 @@ function giveEverything() {
 // Map JS
 var map;
 function initMap() {
-
 }
-
-
 function markMap() {
-
 }
 
 appendStates()

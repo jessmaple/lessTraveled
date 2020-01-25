@@ -1,4 +1,3 @@
-//Object to link state with its abbreviation. NPS api call requires the abbreviation
 var jessMapsApiKey = "AIzaSyAB30200sZiA3TCdbLm4KI7EoHlDWD8ZcY";
 var stateCenter = { lat: 0, lng: 0 };
 var stupidCount = 0;
@@ -7,6 +6,7 @@ var npsQuery = "";
 var state = "";
 var responseArray = [];
 var stateName = "";
+//Object to link state with its center coordinates
 var stateCoords = {
   Alabama: { lat: 32.806671, long: -86.791130 },
   Alaska: { lat: 61.370716, long: -152.404419 },
@@ -60,6 +60,7 @@ var stateCoords = {
   Wisconsin: { lat: 44.268543, long: -89.616508 },
   Wyoming: { lat: 42.755966, long: -107.302490 }
 };
+//Object to link state with its abbreviation. NPS api call requires the abbreviation
 var stateKeys = {
   Alabama: "AL",
   Alaska: "AK",
@@ -199,7 +200,8 @@ function giveEverything() {
           if (setMarkersCount < parksArray.length) {
             setMarkers();
           } else {
-            map.fitBounds(bounds, 3);
+            map.fitBounds(bounds, 1);
+            $(".lds-ripple").remove();
           }
         }
         //do we even get coords? if coords is not empty, do things
@@ -263,8 +265,8 @@ function markMap() {
 appendStates()
 
 $("#states").on("change", function () {
-  console.log($(this).val());
-
+  //start loader animation
+  $(".splash").append('<div class="lds-ripple"><div></div><div></div></div>');
   //Set state variable to user-selected state
   stateName = $(this).val();
   state = stateKeys[stateName];
@@ -273,24 +275,22 @@ $("#states").on("change", function () {
   //API npsQuery
   npsQuery = "stateCode=";
   //Set seperate spans for static text Loading and animated dots...
-  var loadSpan = $("<span>").text("Loading");
-  var dotSpan = $("<span>").text(".");
 
   //Counting variable for the following interval. (Probably could be used in a cleaner way)
   var stupidCount = 0;
   //Interval for animating dots
-  var loadingAnimation = setInterval(function () {
-    //Once count reaches 11
-    if (stupidCount > 10) {
-      //Clear the dots and restart stupidCount
-      dotSpan.empty();
-      stupidCount = 0;
-    }
-    //Continue adding dots
-    dotSpan.text(dotSpan.text() + ".");
-    //Incriment stupidCount
-    stupidCount++;
-  }, 250);
+  // var loadingAnimation = setInterval(function () {
+  //   //Once count reaches 11
+  //   if (stupidCount > 10) {
+  //     //Clear the dots and restart stupidCount
+  //     dotSpan.empty();
+  //     stupidCount = 0;
+  //   }
+  //   //Continue adding dots
+  //   dotSpan.text(dotSpan.text() + ".");
+  //   //Incriment stupidCount
+  //   stupidCount++;
+  // }, 250);
 
 
   // Recursive API call

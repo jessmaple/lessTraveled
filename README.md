@@ -1,1 +1,5 @@
-THIS IS OUR READ ME
+#lessTraveled
+
+
+
+visit the deployed app at: https://jessmaple.github.io/lessTraveled/
